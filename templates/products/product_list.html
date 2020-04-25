@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% include "partials/_messages.html" %}
 
 {% if product_list %}
 <div class="container">
@@ -14,7 +15,13 @@
                     <p class="card-text">{{product.description}}
                     </p>
                     <h5 class="card-text">Price: ${{product.price}}</h5>
-                    <a href="#" class="btn btn-success">Add to cart</a>
+                    {% if product in current_order_products %}
+                    <a href="{% url 'cart-view' %}" class="btn btn-warning">Move to Cart</a>
+                    {% elif product in request.user.profile.items.all %}
+                    <p class="text-muted">You already own this item</p>
+                    {% else %}
+                    <a href="{% url 'add-to-cart' product.id %}" class="btn btn-success">Add to cart</a>
+                    {% endif %}
                 </div>
             </div>
         </div>
