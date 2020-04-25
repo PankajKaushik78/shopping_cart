@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% if product_list %}
+<div class="container">
+    <div class="row">
+        {% for product in product_list %}
+        <div class="col-4 mt-3">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{product.title}}</h3>
+                    <p class="card-text">{{product.description}}
+                    </p>
+                    <h5 class="card-text">Price: ${{product.price}}</h5>
+                    <a href="#" class="btn btn-success">Add to cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+{% endblock %}
